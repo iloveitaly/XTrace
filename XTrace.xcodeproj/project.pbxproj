@@ -1,0 +1,455 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 27307B720A4DEF5E00450B50 /* MainMenu.nib */; };
+		27307B9B0A4DEFF500450B50 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27307B990A4DEFF400450B50 /* InfoPlist.strings */; };
+		27B7F52509D6F2140008D41C /* serverConnection.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52309D6F20C0008D41C /* serverConnection.java */; };
+		27B7F52609D6F2160008D41C /* serverStart.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52409D6F20C0008D41C /* serverStart.java */; };
+		27B7F54D09D6F3580008D41C /* TraceServer.jar in Resources */ = {isa = PBXBuildFile; fileRef = 27B7F51109D6F1D70008D41C /* TraceServer.jar */; };
+		27E406870A4DF6CD001F911E /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E406850A4DF6CD001F911E /* AppController.m */; };
+		27E4068B0A4DF6D9001F911E /* TraceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4068A0A4DF6D9001F911E /* TraceWindow.m */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		27055E080985628D005DB08A /* shared.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = shared.h; path = Source/shared.h; sourceTree = "<group>"; };
+		27307B730A4DEF5E00450B50 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		27307B9A0A4DEFF400450B50 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		27B7F51109D6F1D70008D41C /* TraceServer.jar */ = {isa = PBXFileReference; explicitFileType = archive.jar; includeInIndex = 0; path = TraceServer.jar; sourceTree = BUILT_PRODUCTS_DIR; };
+		27B7F52209D6F20C0008D41C /* manifest.mf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = manifest.mf; path = Source/Server/manifest.mf; sourceTree = SOURCE_ROOT; };
+		27B7F52309D6F20C0008D41C /* serverConnection.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = serverConnection.java; sourceTree = "<group>"; };
+		27B7F52409D6F20C0008D41C /* serverStart.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = serverStart.java; sourceTree = "<group>"; };
+		27E406850A4DF6CD001F911E /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = Source/Controller/AppController.m; sourceTree = SOURCE_ROOT; };
+		27E406860A4DF6CD001F911E /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = Source/Controller/AppController.h; sourceTree = SOURCE_ROOT; };
+		27E406890A4DF6D9001F911E /* TraceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceWindow.h; sourceTree = "<group>"; };
+		27E4068A0A4DF6D9001F911E /* TraceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TraceWindow.m; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* XTrace_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XTrace_Prefix.pch; path = Source/XTrace_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* XTrace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTrace.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		27B7F50F09D6F1D70008D41C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* XTrace.app */,
+				27B7F51109D6F1D70008D41C /* TraceServer.jar */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		27307B600A4DEA1000450B50 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				27E406850A4DF6CD001F911E /* AppController.m */,
+				27E406860A4DF6CD001F911E /* AppController.h */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		27307B610A4DEA1700450B50 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				27E406880A4DF6D9001F911E /* View */,
+				27307B600A4DEA1000450B50 /* Controller */,
+				080E96DDFE201D6D7F000001 /* Model */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		27B7F52109D6F20C0008D41C /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				27B7F52209D6F20C0008D41C /* manifest.mf */,
+				27B7F52309D6F20C0008D41C /* serverConnection.java */,
+				27B7F52409D6F20C0008D41C /* serverStart.java */,
+			);
+			name = Server;
+			path = Source/Server;
+			sourceTree = "<group>";
+		};
+		27E406880A4DF6D9001F911E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				27E406890A4DF6D9001F911E /* TraceWindow.h */,
+				27E4068A0A4DF6D9001F911E /* TraceWindow.m */,
+			);
+			name = View;
+			path = Source/View;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* XTrace */ = {
+			isa = PBXGroup;
+			children = (
+				27307B610A4DEA1700450B50 /* Classes */,
+				27B7F52109D6F20C0008D41C /* Server */,
+				27055E080985628D005DB08A /* shared.h */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = XTrace;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* XTrace_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				27307B990A4DEFF400450B50 /* InfoPlist.strings */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				27307B720A4DEF5E00450B50 /* MainMenu.nib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXJavaArchiveBuildPhase section */
+		27B7F50E09D6F1D70008D41C /* JavaArchive */ = {
+			isa = PBXJavaArchiveBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXJavaArchiveBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* XTrace */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "XTrace" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				270560A40986AC55005DB08A /* Kill Java */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = XTrace;
+			productInstallPath = "$(HOME)/Applications";
+			productName = XTrace;
+			productReference = 8D1107320486CEB800E47090 /* XTrace.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "XTrace" */;
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* XTrace */;
+			projectDirPath = "";
+			targets = (
+				8D1107260486CEB800E47090 /* XTrace */,
+				27B7F51009D6F1D70008D41C /* TraceServer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27B7F54D09D6F3580008D41C /* TraceServer.jar in Resources */,
+				27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */,
+				27307B9B0A4DEFF500450B50 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		270560A40986AC55005DB08A /* Kill Java */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Kill Java";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "killall java\nexit 0";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27B7F50D09D6F1D70008D41C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27B7F52509D6F2140008D41C /* serverConnection.java in Sources */,
+				27B7F52609D6F2160008D41C /* serverStart.java in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				27E406870A4DF6CD001F911E /* AppController.m in Sources */,
+				27E4068B0A4DF6D9001F911E /* TraceWindow.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXToolTarget section */
+		27B7F51009D6F1D70008D41C /* TraceServer */ = {
+			isa = PBXToolTarget;
+			buildConfigurationList = 27B7F51809D6F1ED0008D41C /* Build configuration list for PBXToolTarget "TraceServer" */;
+			buildPhases = (
+				27B7F50D09D6F1D70008D41C /* Sources */,
+				27B7F50E09D6F1D70008D41C /* JavaArchive */,
+				27B7F50F09D6F1D70008D41C /* Frameworks */,
+			);
+			dependencies = (
+			);
+			name = TraceServer;
+			productInstallPath = /usr/local/bin;
+			productName = TraceServer;
+			productReference = 27B7F51109D6F1D70008D41C /* TraceServer.jar */;
+		};
+/* End PBXToolTarget section */
+
+/* Begin PBXVariantGroup section */
+		27307B720A4DEF5E00450B50 /* MainMenu.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27307B730A4DEF5E00450B50 /* English */,
+			);
+			name = MainMenu.nib;
+			sourceTree = SOURCE_ROOT;
+		};
+		27307B990A4DEFF400450B50 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27307B9A0A4DEFF400450B50 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		27B7F51909D6F1ED0008D41C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_MANIFEST_FILE = Server/manifest.mf;
+				JAVA_SOURCE_SUBDIR = .;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = TraceServer;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		27B7F51A09D6F1ED0008D41C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_TYPE = JAR;
+				JAVA_COMPILER = /usr/bin/javac;
+				JAVA_MANIFEST_FILE = Server/manifest.mf;
+				JAVA_SOURCE_SUBDIR = .;
+				OPTIMIZATION_CFLAGS = "-O0";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = TraceServer;
+				PURE_JAVA = YES;
+				REZ_EXECUTABLE = YES;
+				SECTORDER_FLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = XTrace;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = ppc;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = XTrace;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		27B7F51809D6F1ED0008D41C /* Build configuration list for PBXToolTarget "TraceServer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				27B7F51909D6F1ED0008D41C /* Debug */,
+				27B7F51A09D6F1ED0008D41C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "XTrace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "XTrace" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
