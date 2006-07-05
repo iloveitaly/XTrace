@@ -30,6 +30,24 @@ static AppController *_sharedController = nil;
 	return _sharedController;
 }
 
+
+////////////////////////////////////////////////////////////////////////////////
+// INITIALIZE: we setup the default formatting preferences, just in case it is
+//			   the first time
++ (void)initialize {
+
+	//TODO: convert to disposable
+	 DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init]; //+1
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:
+		[defaultHelperFormatter getDefaultFormatting]
+	];
+		
+	[defaultHelperFormatter release];										//1-1=0
+	
+} //initialize
+
+
 - (id) init {
 	if (self = [super init]) {
 		_isStartingServer = NO;
@@ -53,6 +71,11 @@ static AppController *_sharedController = nil;
 		//set the shared controller
 		extern AppController *_sharedController;
 		_sharedController = self;
+		
+		//either app defaults or user set, we create the formatter object
+		formatter = [[DebugFormatter alloc] initWithUserDefaults:			//+1
+			[NSUserDefaults standardUserDefaults]
+					];
 	}
 	
 	return self;
@@ -117,9 +140,11 @@ static AppController *_sharedController = nil;
 	[oLogWindow setAlphaValue:[oLogWindow altAlpha]];
 }
 
+
 -(IBAction) clearLog:(id)sender {
 	[oTraceField setString:@""];
 }
+
 
 -(void) checkForRecentActivity:(NSTimer *)timer {
 #if DEBUG >= 1
@@ -172,10 +197,26 @@ static AppController *_sharedController = nil;
 	NSLog(@"Got Data: %s", [serverData bytes]);
 #endif
 	
-	NSAttributedString *str = [[NSAttributedString alloc] initWithString:[NSString stringWithCString:[serverData bytes] length:[serverData length]]
-															  attributes:[NSDictionary dictionaryWithObject:[NSFont userFixedPitchFontOfSize:10.0F] forKey:NSFontAttributeName]];
-
-	[[oTraceField textStorage] appendAttributedString:str];
+	NSString *dataString = [[NSString alloc] initWithBytes:[serverData bytes] 
+											 length:[serverData length]
+											encoding:NSASCIIStringEncoding
+							];											//+1
+							
+	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator]; //+0
+	
+	NSString *line;
+	NSString *line2;
+	
+	while ((line = [linesEnum nextObject])) {
+	
+		if ([line length]!=0) {
+			line2 = [line stringByAppendingString:@"\n"]; //slow atorelease loop, I know
+			[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
+		}
+	
+	} //while
+	
+	[dataString release];												//1-1=0
 	
 	_lastMessageTime = time(NULL);
 	if(![oLogWindow isVisible]) {

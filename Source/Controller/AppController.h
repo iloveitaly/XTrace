@@ -21,6 +21,7 @@
 #import <time.h>
 
 #import "TraceWindow.h"
+#import "DebugFormatter.h"
 
 #define XTRACE_HOME_PAGE @"http://developer.mabwebdesign.com/xtrace.html"
 #define FILE_HANDLE_DATA_KEY @"NSFileHandleNotificationDataItem"
@@ -39,6 +40,9 @@
 	NSTask *_traceServer;
 	NSFileHandle *_currHandle;
 	BOOL _isStartingServer;
+	
+	//text formatting model class
+	DebugFormatter *formatter;
 	
 	//auto window fade stuff
 	NSTimer *_activityTimer, *_fadeTimer;

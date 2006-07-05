@@ -14,9 +14,27 @@
 		27B7F54D09D6F3580008D41C /* TraceServer.jar in Resources */ = {isa = PBXBuildFile; fileRef = 27B7F51109D6F1D70008D41C /* TraceServer.jar */; };
 		27E406870A4DF6CD001F911E /* AppController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E406850A4DF6CD001F911E /* AppController.m */; };
 		27E4068B0A4DF6D9001F911E /* TraceWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 27E4068A0A4DF6D9001F911E /* TraceWindow.m */; };
+		33CA84150A58552700A1513F /* DebugFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 33CA84140A58552700A1513F /* DebugFormatter.m */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		33CA84000A5854AB00A1513F /* Development */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Development;
+		};
+		33CA84010A5854AB00A1513F /* Deployment */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Deployment;
+		};
+/* End PBXBuildStyle section */
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -25,7 +43,7 @@
 		27307B730A4DEF5E00450B50 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		27307B9A0A4DEFF400450B50 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		27B7F51109D6F1D70008D41C /* TraceServer.jar */ = {isa = PBXFileReference; explicitFileType = archive.jar; includeInIndex = 0; path = TraceServer.jar; sourceTree = BUILT_PRODUCTS_DIR; };
-		27B7F52209D6F20C0008D41C /* manifest.mf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = manifest.mf; path = Source/Server/manifest.mf; sourceTree = SOURCE_ROOT; };
+		27B7F52209D6F20C0008D41C /* MANIFEST.MF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MANIFEST.MF; sourceTree = "<group>"; };
 		27B7F52309D6F20C0008D41C /* serverConnection.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = serverConnection.java; sourceTree = "<group>"; };
 		27B7F52409D6F20C0008D41C /* serverStart.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = serverStart.java; sourceTree = "<group>"; };
 		27E406850A4DF6CD001F911E /* AppController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppController.m; path = Source/Controller/AppController.m; sourceTree = SOURCE_ROOT; };
@@ -36,7 +54,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* XTrace_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XTrace_Prefix.pch; path = Source/XTrace_Prefix.pch; sourceTree = "<group>"; };
-		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
+		33CA84130A58552700A1513F /* DebugFormatter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DebugFormatter.h; path = Source/Model/DebugFormatter.h; sourceTree = "<group>"; };
+		33CA84140A58552700A1513F /* DebugFormatter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DebugFormatter.m; path = Source/Model/DebugFormatter.m; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* XTrace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTrace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -62,6 +81,8 @@
 		080E96DDFE201D6D7F000001 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				33CA84130A58552700A1513F /* DebugFormatter.h */,
+				33CA84140A58552700A1513F /* DebugFormatter.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -115,7 +136,7 @@
 		27B7F52109D6F20C0008D41C /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				27B7F52209D6F20C0008D41C /* manifest.mf */,
+				27B7F52209D6F20C0008D41C /* MANIFEST.MF */,
 				27B7F52309D6F20C0008D41C /* serverConnection.java */,
 				27B7F52409D6F20C0008D41C /* serverStart.java */,
 			);
@@ -160,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				27307B990A4DEFF400450B50 /* InfoPlist.strings */,
-				8D1107310486CEB800E47090 /* Info.plist */,
 				27307B720A4DEF5E00450B50 /* MainMenu.nib */,
 			);
 			name = Resources;
@@ -213,6 +233,12 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "XTrace" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				33CA84000A5854AB00A1513F /* Development */,
+				33CA84010A5854AB00A1513F /* Deployment */,
+			);
 			hasScannedForEncodings = 1;
 			mainGroup = 29B97314FDCFA39411CA2CEA /* XTrace */;
 			projectDirPath = "";
@@ -270,6 +296,7 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				27E406870A4DF6CD001F911E /* AppController.m in Sources */,
 				27E4068B0A4DF6D9001F911E /* TraceWindow.m in Sources */,
+				33CA84150A58552700A1513F /* DebugFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,10 +374,13 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				JAVA_ARCHIVE_CLASSES = YES;
+				JAVA_ARCHIVE_COMPRESSION = YES;
 				JAVA_ARCHIVE_TYPE = JAR;
 				JAVA_COMPILER = /usr/bin/javac;
-				JAVA_MANIFEST_FILE = Server/manifest.mf;
+				JAVA_COMPILER_DEBUGGING_SYMBOLS = NO;
+				JAVA_COMPILER_SOURCE_VERSION = 1.4;
+				JAVA_COMPILER_TARGET_VM_VERSION = 1.4;
+				JAVA_MANIFEST_FILE = Source/Server/MANIFEST.MF;
 				JAVA_SOURCE_SUBDIR = .;
 				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
@@ -405,7 +435,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Debug;
 		};
@@ -415,7 +444,6 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = /Developer/SDKs/MacOSX10.4u.sdk;
 			};
 			name = Release;
 		};
