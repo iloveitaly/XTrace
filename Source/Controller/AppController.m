@@ -78,6 +78,8 @@ static AppController *_sharedController = nil;
 					];
 	}
 	
+	autoHideActive = YES;
+	
 	return self;
 }
 
@@ -107,11 +109,8 @@ static AppController *_sharedController = nil;
 	[_currHandle readInBackgroundAndNotify];
 	
 	//create the activity timer
-	_activityTimer = [[NSTimer scheduledTimerWithTimeInterval:ACTIVITY_CHECK_INTERVAL //check every half a minute
-													   target:self
-													 selector:@selector(checkForRecentActivity:)
-													 userInfo:nil
-													  repeats:YES] retain];
+	[self createActivityTimer];
+	
 	_lastMessageTime = time(NULL);
 	
 	//change the state of the button
@@ -120,9 +119,7 @@ static AppController *_sharedController = nil;
 }
 
 -(IBAction) stopServer:(id)sender {
-	[_activityTimer invalidate];
-	[_activityTimer release];
-	_activityTimer = nil;
+	[self releaseActivityTimer];
 	
 	[_traceServer terminate];
 	[_traceServer release];
@@ -138,6 +135,7 @@ static AppController *_sharedController = nil;
 -(IBAction) showLogWindow:(id)sender {
 	[oLogWindow makeKeyAndOrderFront:self];
 	[oLogWindow setAlphaValue:[oLogWindow altAlpha]];
+	[self createActivityTimer];
 }
 
 
@@ -145,18 +143,29 @@ static AppController *_sharedController = nil;
 	[oTraceField setString:@""];
 }
 
+-(IBAction) toggleAutoHide:(id)sender {
+	if([sender state] == NSOnState) {
+		autoHideActive = YES;
+		[self createActivityTimer];
+		
+	} else {
+		autoHideActive = NO;
+		[self releaseActivityTimer];
+	}
+	
+}
 
 -(void) checkForRecentActivity:(NSTimer *)timer {
 #if DEBUG >= 1
 	NSLog(@"Checking for recent activity...");
 #endif
-	
+
 	if(_fadeTimer == nil && [oLogWindow isVisible] && ![oLogWindow isKeyWindow] && time(NULL) - _lastMessageTime > MAX_LAST_MESSAGE_TIME) {
-		_fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL
-													   target:self
-													 selector:@selector(_fadeWindow:)
-													 userInfo:nil
-													  repeats:YES] retain];
+			_fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL
+														   target:self
+														 selector:@selector(_fadeWindow:)
+														 userInfo:nil
+														  repeats:YES] retain];
 	}
 }
 
@@ -171,8 +180,28 @@ static AppController *_sharedController = nil;
         _fadeTimer = nil;
         
 		//close the window. If you reset alpha weird stuff happens
+		[self releaseActivityTimer];
 		[oLogWindow orderOut:self];
     }
+}
+
+//-----------------------
+//  Activity Timer Methods
+//-----------------------
+-(void) createActivityTimer {
+	if(autoHideActive) {
+		_activityTimer = [[NSTimer scheduledTimerWithTimeInterval:ACTIVITY_CHECK_INTERVAL //check every half a minute
+														   target:self
+														 selector:@selector(checkForRecentActivity:)
+														 userInfo:nil
+														  repeats:YES] retain];
+	}
+}
+
+-(void) releaseActivityTimer {	
+	[_activityTimer invalidate];
+	[_activityTimer release];
+	_activityTimer = nil;
 }
 
 //-----------------------

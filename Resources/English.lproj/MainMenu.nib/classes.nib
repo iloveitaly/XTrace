@@ -6,6 +6,7 @@
                 showLogWindow = id; 
                 startServer = id; 
                 stopServer = id; 
+                toggleAutoHide = id; 
                 visitHomePage = id; 
             }; 
             CLASS = AppController; 

@@ -47,6 +47,7 @@
 	//auto window fade stuff
 	NSTimer *_activityTimer, *_fadeTimer;
 	time_t _lastMessageTime;
+	BOOL autoHideActive;
 }
 
 +(AppController *) sharedController;
@@ -56,9 +57,12 @@
 -(IBAction) stopServer:(id)sender;
 -(IBAction) clearLog:(id)sender;
 -(IBAction) showLogWindow:(id)sender;
+-(IBAction) toggleAutoHide:(id)sender;
 
 -(void) checkForRecentActivity:(NSTimer *)timer;
 -(void) _fadeWindow:(NSTimer *)theTimer;
+-(void) createActivityTimer;
+-(void) releaseActivityTimer;
 
 //-----------------------
 //	Getter & Setter
