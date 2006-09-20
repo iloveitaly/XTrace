@@ -26,19 +26,17 @@
 // INIT: basic initialization
 -(id) init {
 	if (self = [super init]) {
-		defaultFont = [[NSFont userFontOfSize:11.0F] retain];		//+1
-		defaultAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:
-			defaultFont, NSFontAttributeName,nil 
-		] retain];															//+1
+		defaultFont = [[NSFont userFixedPitchFontOfSize:10.0F] retain];
+		defaultAttributes = [[NSDictionary dictionaryWithObjectsAndKeys:defaultFont, NSFontAttributeName, nil] retain];
 		
-		attributeMapping = [[NSDictionary dictionaryWithObjectsAndKeys: 
-				@"debug",@"[DEBUG] ",
-				@"warn", @"[WARN] ",
-				@"normal", @"[NORMAL] ",
-				@"critical", @"[CRITICAL] ",nil
-			] retain];														//+1
+		attributeMapping = [[NSDictionary dictionaryWithObjectsAndKeys:
+			@"debug",@"[DEBUG] ",
+			@"warn", @"[WARN] ",
+			@"normal", @"[NORMAL] ",
+			@"critical", @"[CRITICAL] ", nil] retain];
 		
 	}
+	
 	return self;
 } //init
 
@@ -59,13 +57,13 @@
 //							disposable instance after all)
 -(NSDictionary *) getDefaultFormatting {
 	return [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSArchiver archivedDataWithRootObject:[NSColor grayColor] ],@"debugColor",
+			[NSArchiver archivedDataWithRootObject:[NSColor grayColor]],@"debugColor",
 			@"NO",@"debugBoldEnabled",
-			[NSArchiver archivedDataWithRootObject:[NSColor blueColor] ],@"warnColor",
+			[NSArchiver archivedDataWithRootObject:[NSColor blueColor]],@"warnColor",
 			@"NO",@"warnBoldEnabled",
-			[NSArchiver archivedDataWithRootObject:[NSColor blackColor] ],@"normalColor",
+			[NSArchiver archivedDataWithRootObject:[NSColor blackColor]],@"normalColor",
 			@"NO",@"normalBoldEnabled",
-			[NSArchiver archivedDataWithRootObject:[NSColor redColor] ],@"criticalColor",
+			[NSArchiver archivedDataWithRootObject:[NSColor redColor]],@"criticalColor",
 			@"YES",@"criticalBoldEnabled",
 			@"YES",@"removeDebugTextEnabled",
 			nil];															 //0
@@ -86,7 +84,7 @@
 	NSEnumerator *prefixes = [attributeMapping keyEnumerator];			//0
 	
 	while ((prefix = [prefixes nextObject]) && !found) {
-		found = [string hasPrefix:prefix]==YES;
+		found = [string hasPrefix:prefix] == YES;
 		if (found)
 			debugLevel = prefix;	//should be valid as it points to the key itself
 	}

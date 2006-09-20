@@ -73,9 +73,7 @@ static AppController *_sharedController = nil;
 		_sharedController = self;
 		
 		//either app defaults or user set, we create the formatter object
-		formatter = [[DebugFormatter alloc] initWithUserDefaults:			//+1
-			[NSUserDefaults standardUserDefaults]
-					];
+		formatter = [[DebugFormatter alloc] initWithUserDefaults:[NSUserDefaults standardUserDefaults]];
 	}
 	
 	autoHideActive = YES;
@@ -83,8 +81,14 @@ static AppController *_sharedController = nil;
 	return self;
 }
 
--(void) awakeFromNib {
-	[oTraceField setString:@""];
+-(void) awakeFromNib {	
+	//make the shell script editor fixed at monaco pt 10 font
+	NSMutableDictionary *editorAttributes = [NSMutableDictionary dictionary];
+	NSFont *codeFont = [NSFont userFixedPitchFontOfSize:10];
+	[editorAttributes setObject:codeFont forKey:NSFontAttributeName];
+	[oTraceField setFont:codeFont];
+	[oTraceField setTypingAttributes:editorAttributes];
+	
 }
 
 -(IBAction) visitHomePage:(id)sender {
@@ -220,7 +224,7 @@ static AppController *_sharedController = nil;
 //-----------------------
 -(void) serverData:(NSNotification *) note {
 	NSData *serverData;
-	if(![serverData = [[note userInfo] valueForKey:FILE_HANDLE_DATA_KEY] length]) return; //check to make sure we font have EOF
+	if(![serverData = [[note userInfo] valueForKey:FILE_HANDLE_DATA_KEY] length]) return; //check to make sure we dont have EOF
 	
 #if DEBUG >= 1
 	NSLog(@"Got Data: %s", [serverData bytes]);
@@ -228,24 +232,21 @@ static AppController *_sharedController = nil;
 	
 	NSString *dataString = [[NSString alloc] initWithBytes:[serverData bytes] 
 											 length:[serverData length]
-											encoding:NSASCIIStringEncoding
-							];											//+1
+											encoding:NSASCIIStringEncoding];
 							
-	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator]; //+0
+	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
 	
 	NSString *line;
 	NSString *line2;
 	
 	while ((line = [linesEnum nextObject])) {
-	
-		if ([line length]!=0) {
-			line2 = [line stringByAppendingString:@"\n"]; //slow atorelease loop, I know
+		if ([line length] != 0) {
+			line2 = [line stringByAppendingString:@"\n"]; //slow autorelease loop, I know
 			[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
 		}
+	}
 	
-	} //while
-	
-	[dataString release];												//1-1=0
+	[dataString release];
 	
 	_lastMessageTime = time(NULL);
 	if(![oLogWindow isVisible]) {
@@ -258,13 +259,13 @@ static AppController *_sharedController = nil;
 	[_currHandle readInBackgroundAndNotify];
 }
 
--(void) serverClosed:(NSNotification *) note {
+- (void) serverClosed:(NSNotification *) note {
 #if DEBUG
 	NSLog(@"Task closed %@", note);
 #endif
 }
 
--(void) appWillTerminate:(NSNotification *) note {
+- (void) appWillTerminate:(NSNotification *) note {
 #if DEBUG
 	NSLog(@"App will terminate");
 #endif
