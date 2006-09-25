@@ -30,22 +30,15 @@ static AppController *_sharedController = nil;
 	return _sharedController;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-// INITIALIZE: we setup the default formatting preferences, just in case it is
-//			   the first time
 + (void)initialize {
-
 	//TODO: convert to disposable
 	 DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init]; //+1
 	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:
-		[defaultHelperFormatter getDefaultFormatting]
-	];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:[defaultHelperFormatter getDefaultFormatting]];
 		
-	[defaultHelperFormatter release];										//1-1=0
+	[defaultHelperFormatter release];
 	
-} //initialize
+}
 
 
 - (id) init {
@@ -89,6 +82,16 @@ static AppController *_sharedController = nil;
 	[oTraceField setFont:codeFont];
 	[oTraceField setTypingAttributes:editorAttributes];
 	
+	// Disable word wrapping
+	float LargeNumberForText = 1.0e7;
+	NSTextContainer *textContainer = [oTraceField textContainer];
+	[textContainer setContainerSize:NSMakeSize(LargeNumberForText, LargeNumberForText)];
+    [textContainer setWidthTracksTextView:NO];
+    [textContainer setHeightTracksTextView:NO];
+    
+	[oTraceField setHorizontallyResizable:YES];
+	[oTraceField setAutoresizingMask:NSViewHeightSizable];
+	[oTraceField setMaxSize:NSMakeSize(LargeNumberForText, LargeNumberForText)];	
 }
 
 -(IBAction) visitHomePage:(id)sender {
