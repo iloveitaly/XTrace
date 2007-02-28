@@ -82,16 +82,7 @@ static AppController *_sharedController = nil;
 	[oTraceField setFont:codeFont];
 	[oTraceField setTypingAttributes:editorAttributes];
 	
-	// Disable word wrapping
-	float LargeNumberForText = 1.0e7;
-	NSTextContainer *textContainer = [oTraceField textContainer];
-	[textContainer setContainerSize:NSMakeSize(LargeNumberForText, LargeNumberForText)];
-    [textContainer setWidthTracksTextView:NO];
-    [textContainer setHeightTracksTextView:NO];
-    
-	[oTraceField setHorizontallyResizable:YES];
-	[oTraceField setAutoresizingMask:NSViewHeightSizable];
-	[oTraceField setMaxSize:NSMakeSize(LargeNumberForText, LargeNumberForText)];	
+	[oTraceField setWrapsText:NO];
 }
 
 -(IBAction) visitHomePage:(id)sender {

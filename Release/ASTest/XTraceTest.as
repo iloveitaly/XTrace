@@ -23,6 +23,7 @@ class XTraceTest {
 		debug.initSocket("127.0.0.1");
 		
 		debug.trace("Yo, whaz up?");
+		debug.trace("This is a really really really really really really really really really really really long string");
 		debug.trace("[DEBUG] This is a debug string");
 		debug.trace("[WARN] This is a warning");
 		debug.trace("[NORMAL] This is a normal formatter string");

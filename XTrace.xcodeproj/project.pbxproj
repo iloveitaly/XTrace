@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270DB94D0B962B6200D9DE04 /* NSTextView+Wrapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */; };
 		27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 27307B720A4DEF5E00450B50 /* MainMenu.nib */; };
 		27B7F52509D6F2140008D41C /* serverConnection.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52309D6F20C0008D41C /* serverConnection.java */; };
 		27B7F52609D6F2160008D41C /* serverStart.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52409D6F20C0008D41C /* serverStart.java */; };
@@ -21,10 +22,22 @@
 		C0D832B90AA6B29600FD8857 /* XTraceIcon.ai in Resources */ = {isa = PBXBuildFile; fileRef = C0D832B80AA6B29600FD8857 /* XTraceIcon.ai */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		270DB9370B962A8B00D9DE04 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 27B7F51009D6F1D70008D41C /* TraceServer */;
+			remoteInfo = TraceServer;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		27055E080985628D005DB08A /* shared.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = shared.h; path = Source/shared.h; sourceTree = "<group>"; };
+		270DB94B0B962B6200D9DE04 /* NSTextView+Wrapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTextView+Wrapping.h"; path = "Source/Categories/NSTextView+Wrapping.h"; sourceTree = "<group>"; };
+		270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTextView+Wrapping.m"; path = "Source/Categories/NSTextView+Wrapping.m"; sourceTree = "<group>"; };
 		27307B730A4DEF5E00450B50 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
 		27B7F51109D6F1D70008D41C /* TraceServer.jar */ = {isa = PBXFileReference; explicitFileType = archive.jar; includeInIndex = 0; path = TraceServer.jar; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B7F52209D6F20C0008D41C /* MANIFEST.MF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MANIFEST.MF; sourceTree = "<group>"; };
@@ -102,6 +115,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		270DB94A0B962B2B00D9DE04 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				270DB94B0B962B6200D9DE04 /* NSTextView+Wrapping.h */,
+				270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		27307B600A4DEA1000450B50 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +136,7 @@
 		27307B610A4DEA1700450B50 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				270DB94A0B962B2B00D9DE04 /* Categories */,
 				27E406880A4DF6D9001F911E /* View */,
 				27307B600A4DEA1000450B50 /* Controller */,
 				080E96DDFE201D6D7F000001 /* Model */,
@@ -211,6 +234,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				270DB9380B962A8B00D9DE04 /* PBXTargetDependency */,
 			);
 			name = XTrace;
 			productInstallPath = "$(HOME)/Applications";
@@ -284,10 +308,19 @@
 				27E406870A4DF6CD001F911E /* AppController.m in Sources */,
 				27E4068B0A4DF6D9001F911E /* TraceWindow.m in Sources */,
 				33CA84150A58552700A1513F /* DebugFormatter.m in Sources */,
+				270DB94D0B962B6200D9DE04 /* NSTextView+Wrapping.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		270DB9380B962A8B00D9DE04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 27B7F51009D6F1D70008D41C /* TraceServer */;
+			targetProxy = 270DB9370B962A8B00D9DE04 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXToolTarget section */
 		27B7F51009D6F1D70008D41C /* TraceServer */ = {
@@ -367,7 +400,7 @@
 				JAVA_COMPILER_DEBUGGING_SYMBOLS = NO;
 				JAVA_COMPILER_SOURCE_VERSION = 1.4;
 				JAVA_COMPILER_TARGET_VM_VERSION = 1.4;
-				JAVA_MANIFEST_FILE = Source/Server/MANIFEST.MF;
+				JAVA_MANIFEST_FILE = Source/Server/manifest.mf;
 				JAVA_SOURCE_SUBDIR = .;
 				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
@@ -428,6 +461,10 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
