@@ -127,8 +127,8 @@
 		27307B600A4DEA1000450B50 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				27E406850A4DF6CD001F911E /* AppController.m */,
 				27E406860A4DF6CD001F911E /* AppController.h */,
+				27E406850A4DF6CD001F911E /* AppController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -168,9 +168,9 @@
 		29B97314FDCFA39411CA2CEA /* XTrace */ = {
 			isa = PBXGroup;
 			children = (
+				27055E080985628D005DB08A /* shared.h */,
 				27307B610A4DEA1700450B50 /* Classes */,
 				27B7F52109D6F20C0008D41C /* Server */,
-				27055E080985628D005DB08A /* shared.h */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,

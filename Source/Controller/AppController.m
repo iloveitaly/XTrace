@@ -18,6 +18,7 @@
  */
 
 #import "AppController.h"
+#import "NSTextView+Wrapping.h"
 #import "shared.h"
 
 #import <time.h>
@@ -32,7 +33,7 @@ static AppController *_sharedController = nil;
 
 + (void)initialize {
 	//TODO: convert to disposable
-	 DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init]; //+1
+	 DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:[defaultHelperFormatter getDefaultFormatting]];
 		
@@ -42,9 +43,7 @@ static AppController *_sharedController = nil;
 
 
 - (id) init {
-	if (self = [super init]) {
-		_isStartingServer = NO;
-				
+	if (self = [super init]) {				
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(serverClosed:)
 													 name:@"NSTaskDidTerminateNotification"
@@ -52,6 +51,10 @@ static AppController *_sharedController = nil;
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(appWillTerminate:)
 													 name:@"NSApplicationWillTerminateNotification"
+												   object:NSApp];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(applicationDidFinishLaunching:)
+													 name:NSApplicationDidFinishLaunchingNotification
 												   object:NSApp];
 		
 		//register to get data from the child process
@@ -82,16 +85,19 @@ static AppController *_sharedController = nil;
 	[oTraceField setFont:codeFont];
 	[oTraceField setTypingAttributes:editorAttributes];
 	
-	[oTraceField setWrapsText:NO];
+	if(PREF_KEY_BOOL(XASH_NOWRAP))
+		[oTraceField setWrapsText:NO];
+}
+
+- (void) applicationDidFinishLaunching:(NSNotification * )note {
+	[self startServer:self];
 }
 
 -(IBAction) visitHomePage:(id)sender {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:XTRACE_HOME_PAGE]];
 }
 
--(IBAction) startServer:(id)sender {
-	//[[[oTraceField textStorage] mutableString] setString:@""];
-	
+-(IBAction) startServer:(id)sender {	
 	NSString *serverPath = [[NSBundle mainBundle] pathForResource:@"TraceServer" ofType:@"jar"];
 	
 	NSPipe *outPipe = [NSPipe pipe];
@@ -110,10 +116,6 @@ static AppController *_sharedController = nil;
 	[self createActivityTimer];
 	
 	_lastMessageTime = time(NULL);
-	
-	//change the state of the button
-	[sender setAction:@selector(stopServer:)];
-	[sender setTitle:@"Stop Trace Server"];
 }
 
 -(IBAction) stopServer:(id)sender {
@@ -124,10 +126,6 @@ static AppController *_sharedController = nil;
 	_traceServer = nil;
 	
 	[_currHandle release];
-	
-	//change the state and action of the button
-	[sender setAction:@selector(startServer:)];
-	[sender setTitle:@"Start Trace Server"];
 }
 
 -(IBAction) showLogWindow:(id)sender {
@@ -200,17 +198,6 @@ static AppController *_sharedController = nil;
 	[_activityTimer invalidate];
 	[_activityTimer release];
 	_activityTimer = nil;
-}
-
-//-----------------------
-//	Getter & Setter
-//-----------------------
--(BOOL) isStartingServer {
-	return _isStartingServer;
-}
-
--(void) setIsStartingServer:(BOOL)b {
-	_isStartingServer = b;
 }
 
 //-----------------------

@@ -25,6 +25,7 @@
 
 #define XTRACE_HOME_PAGE @"http://developer.mabwebdesign.com/xtrace.html"
 #define FILE_HANDLE_DATA_KEY @"NSFileHandleNotificationDataItem"
+#define XASH_NOWRAP @"noWrap"
 #define DEBUG 0
 
 //auto window fade constants
@@ -39,7 +40,6 @@
 	
 	NSTask *_traceServer;
 	NSFileHandle *_currHandle;
-	BOOL _isStartingServer;
 	
 	//text formatting model class
 	DebugFormatter *formatter;
@@ -63,12 +63,6 @@
 -(void) _fadeWindow:(NSTimer *)theTimer;
 -(void) createActivityTimer;
 -(void) releaseActivityTimer;
-
-//-----------------------
-//	Getter & Setter
-//-----------------------
--(BOOL) isStartingServer;
--(void) setIsStartingServer:(BOOL)b;
 
 //-----------------------
 //	Notification Methods
