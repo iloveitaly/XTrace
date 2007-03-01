@@ -221,14 +221,25 @@ static AppController *_sharedController = nil;
 											 length:[serverData length]
 											encoding:NSASCIIStringEncoding];
 	
+	if([dataString length] == 1) {
+		// Flash returns a LF (hex 0xA) when the connection is closed...
+		if([dataString characterAtIndex:0] == 0xA) {
+			[dataString release];
+			[_currHandle readInBackgroundAndNotify];
+			return;
+		} else {
+			NSLog(@"Seemingly empty string? Length 1, hex: 0x%s",[dataString characterAtIndex:0]);
+		}
+	}
+	
 	// if we are recieving a notification of a closed connection, close the window
 	if([dataString isEqualToString:@"Connection Closed."] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
-		_fadeTimer = FADE_TIMER;
-		[_currHandle readInBackgroundAndNotify];
+		[oLogWindow performClose:self];
+	} else if(![oLogWindow isVisible]) {
+		[self showLogWindow:nil];
 	}
 	
 	// debug formatting
-	
 	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
 	
 	NSString *line;
@@ -240,16 +251,11 @@ static AppController *_sharedController = nil;
 			[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
 		}
 	}
-	
+
 	[dataString release];
 	
 	// log the message time for auto-fade functionality
 	_lastMessageTime = time(NULL);
-	
-	// if the window isn't visible... bring it up
-	if(![oLogWindow isVisible]) {
-		[self showLogWindow:nil];
-	}
 	
 	// keep the scroller at the bottom
 	[oTraceField scrollRangeToVisible:NSMakeRange([[oTraceField string] length], 0)];

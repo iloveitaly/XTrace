@@ -370,7 +370,7 @@
 				JAVA_ARCHIVE_CLASSES = YES;
 				JAVA_ARCHIVE_TYPE = JAR;
 				JAVA_COMPILER = /usr/bin/javac;
-				JAVA_MANIFEST_FILE = Source/Server/MANIFEST.MF;
+				JAVA_MANIFEST_FILE = Source/Server/manifest.mf;
 				JAVA_SOURCE_SUBDIR = .;
 				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
