@@ -21,6 +21,12 @@
 #import "NSTextView+Wrapping.h"
 #import "shared.h"
 
+#define FADE_TIMER [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL \
+													 target:self \
+												   selector:@selector(_fadeWindow:) \
+												   userInfo:nil \
+													repeats:YES] retain];
+
 #import <time.h>
 
 static AppController *_sharedController = nil;
@@ -33,9 +39,13 @@ static AppController *_sharedController = nil;
 
 + (void)initialize {
 	//TODO: convert to disposable
-	 DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init];
+	DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init];
+	NSDictionary *defaults = [[defaultHelperFormatter getDefaultFormatting] mutableCopy];
 	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[defaultHelperFormatter getDefaultFormatting]];
+	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_NOWRAP];
+	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_AUTO_CLOSE];
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 		
 	[defaultHelperFormatter release];
 	
@@ -157,11 +167,7 @@ static AppController *_sharedController = nil;
 #endif
 
 	if(_fadeTimer == nil && [oLogWindow isVisible] && ![oLogWindow isKeyWindow] && time(NULL) - _lastMessageTime > MAX_LAST_MESSAGE_TIME) {
-			_fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL
-														   target:self
-														 selector:@selector(_fadeWindow:)
-														 userInfo:nil
-														  repeats:YES] retain];
+		_fadeTimer = FADE_TIMER;
 	}
 }
 
@@ -214,7 +220,15 @@ static AppController *_sharedController = nil;
 	NSString *dataString = [[NSString alloc] initWithBytes:[serverData bytes] 
 											 length:[serverData length]
 											encoding:NSASCIIStringEncoding];
-							
+	
+	// if we are recieving a notification of a closed connection, close the window
+	if([dataString isEqualToString:@"Connection Closed."] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
+		_fadeTimer = FADE_TIMER;
+		[_currHandle readInBackgroundAndNotify];
+	}
+	
+	// debug formatting
+	
 	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
 	
 	NSString *line;
@@ -222,21 +236,25 @@ static AppController *_sharedController = nil;
 	
 	while ((line = [linesEnum nextObject])) {
 		if ([line length] != 0) {
-			line2 = [line stringByAppendingString:@"\n"]; //slow autorelease loop, I know
+			line2 = [line stringByAppendingString:@"\n"];
 			[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
 		}
 	}
 	
 	[dataString release];
 	
+	// log the message time for auto-fade functionality
 	_lastMessageTime = time(NULL);
+	
+	// if the window isn't visible... bring it up
 	if(![oLogWindow isVisible]) {
 		[self showLogWindow:nil];
 	}
 	
-	//keep the scroller at the bottom
+	// keep the scroller at the bottom
 	[oTraceField scrollRangeToVisible:NSMakeRange([[oTraceField string] length], 0)];
 	
+	// read the next trace output
 	[_currHandle readInBackgroundAndNotify];
 }
 

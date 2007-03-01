@@ -14,7 +14,12 @@
             OUTLETS = {oLogWindow = TraceWindow; oTraceField = NSTextView; }; 
             SUPERCLASS = NSObject; 
         }, 
-        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {"" = id; }; 
+            CLASS = FirstResponder; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSObject; 
+        }, 
         {CLASS = TraceWindow; LANGUAGE = ObjC; SUPERCLASS = NSPanel; }
     ); 
     IBVersion = 1; 

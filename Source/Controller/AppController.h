@@ -26,6 +26,7 @@
 #define XTRACE_HOME_PAGE @"http://developer.mabwebdesign.com/xtrace.html"
 #define FILE_HANDLE_DATA_KEY @"NSFileHandleNotificationDataItem"
 #define XASH_NOWRAP @"noWrap"
+#define XASH_AUTO_CLOSE @"autoClose"
 #define DEBUG 0
 
 //auto window fade constants

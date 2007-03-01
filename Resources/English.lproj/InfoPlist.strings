@@ -1,5 +1,5 @@
 /* Localized versions of Info.plist keys */
 
-NSHumanReadableCopyright = "© Michael Bianco, 2006\nhttp://mabblog.com/";
+NSHumanReadableCopyright = "Â© Michael Bianco, 2007\nhttp://mabblog.com/";
 CFBundleShortVersionString = "XTrace Version 1.1";
-CFBundleGetInfoString = "XTrace V1.1, Copyright 2006 Michael Bianco";
+CFBundleGetInfoString = "XTrace V1.1, Copyright 2007 Michael Bianco";
