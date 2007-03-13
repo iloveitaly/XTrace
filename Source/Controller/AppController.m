@@ -139,7 +139,7 @@ static AppController *_sharedController = nil;
 }
 
 -(IBAction) showLogWindow:(id)sender {
-	[oLogWindow makeKeyAndOrderFront:self];
+	[oLogWindow orderFront:self];
 	[oLogWindow setAlphaValue:[oLogWindow altAlpha]];
 	[self createActivityTimer];
 }
@@ -228,7 +228,7 @@ static AppController *_sharedController = nil;
 			[_currHandle readInBackgroundAndNotify];
 			return;
 		} else {
-			NSLog(@"Seemingly empty string? Length 1, hex: 0x%s",[dataString characterAtIndex:0]);
+			NSLog(@"Seemingly empty string? Length 1, hex: 0x%c",[dataString characterAtIndex:0]);
 		}
 	}
 	

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		270DB94D0B962B6200D9DE04 /* NSTextView+Wrapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */; };
 		27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 27307B720A4DEF5E00450B50 /* MainMenu.nib */; };
+		27B2AB400BA62BE3009B7391 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */; };
+		27B2AB690BA62C2A009B7391 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */; };
 		27B7F52509D6F2140008D41C /* serverConnection.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52309D6F20C0008D41C /* serverConnection.java */; };
 		27B7F52609D6F2160008D41C /* serverStart.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52409D6F20C0008D41C /* serverStart.java */; };
 		27B7F54D09D6F3580008D41C /* TraceServer.jar in Resources */ = {isa = PBXBuildFile; fileRef = 27B7F51109D6F1D70008D41C /* TraceServer.jar */; };
@@ -32,6 +34,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		27B2AB670BA62C19009B7391 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				27B2AB690BA62C2A009B7391 /* Sparkle.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -39,6 +55,7 @@
 		270DB94B0B962B6200D9DE04 /* NSTextView+Wrapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTextView+Wrapping.h"; path = "Source/Categories/NSTextView+Wrapping.h"; sourceTree = "<group>"; };
 		270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTextView+Wrapping.m"; path = "Source/Categories/NSTextView+Wrapping.m"; sourceTree = "<group>"; };
 		27307B730A4DEF5E00450B50 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Source/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		27B7F51109D6F1D70008D41C /* TraceServer.jar */ = {isa = PBXFileReference; explicitFileType = archive.jar; includeInIndex = 0; path = TraceServer.jar; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B7F52209D6F20C0008D41C /* MANIFEST.MF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MANIFEST.MF; sourceTree = "<group>"; };
 		27B7F52309D6F20C0008D41C /* serverConnection.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = serverConnection.java; sourceTree = "<group>"; };
@@ -73,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				27B2AB400BA62BE3009B7391 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +109,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -228,6 +247,7 @@
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
+				27B2AB670BA62C19009B7391 /* Copy Frameworks */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				270560A40986AC55005DB08A /* Kill Java */,
 			);
@@ -423,6 +443,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Source/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -438,6 +463,11 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Source/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -460,6 +490,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_VERSION = 1.1;
 				ARCHS = (
 					ppc,
 					i386,
