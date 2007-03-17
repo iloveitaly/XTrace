@@ -5,24 +5,18 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>XTrace</string>
-	<key>CFBundleIconFile</key>
-	<string>icon.icns</string>
+	<string>Sparkle</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.mawebdesign.XTrace</string>
+	<string>org.andymatuschak.Sparkle</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>Sparkle</string>
 	<key>CFBundlePackageType</key>
-	<string>APPL</string>
+	<string>FMWK</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>${APP_VERSION}</string>
-	<key>NSMainNibFile</key>
-	<string>MainMenu</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>SUFeedURL</key>
-	<string>http://mabblog.com/rss/xtrace.xml</string>
+	<string>1.1</string>
 </dict>
 </plist>

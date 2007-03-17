@@ -18,7 +18,14 @@
  */
 
 #import "AppController.h"
+#import "NSTextView+Wrapping.h"
 #import "shared.h"
+
+#define FADE_TIMER [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL \
+													 target:self \
+												   selector:@selector(_fadeWindow:) \
+												   userInfo:nil \
+													repeats:YES] retain];
 
 #import <time.h>
 
@@ -32,9 +39,13 @@ static AppController *_sharedController = nil;
 
 + (void)initialize {
 	//TODO: convert to disposable
-	 DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init]; //+1
+	DebugFormatter *defaultHelperFormatter = [[DebugFormatter alloc] init];
+	NSDictionary *defaults = [[defaultHelperFormatter getDefaultFormatting] mutableCopy];
 	
-	[[NSUserDefaults standardUserDefaults] registerDefaults:[defaultHelperFormatter getDefaultFormatting]];
+	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_NOWRAP];
+	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_AUTO_CLOSE];
+	
+	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 		
 	[defaultHelperFormatter release];
 	
@@ -42,9 +53,7 @@ static AppController *_sharedController = nil;
 
 
 - (id) init {
-	if (self = [super init]) {
-		_isStartingServer = NO;
-				
+	if (self = [super init]) {				
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(serverClosed:)
 													 name:@"NSTaskDidTerminateNotification"
@@ -52,6 +61,10 @@ static AppController *_sharedController = nil;
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(appWillTerminate:)
 													 name:@"NSApplicationWillTerminateNotification"
+												   object:NSApp];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(applicationDidFinishLaunching:)
+													 name:NSApplicationDidFinishLaunchingNotification
 												   object:NSApp];
 		
 		//register to get data from the child process
@@ -82,16 +95,19 @@ static AppController *_sharedController = nil;
 	[oTraceField setFont:codeFont];
 	[oTraceField setTypingAttributes:editorAttributes];
 	
-	[oTraceField setWrapsText:NO];
+	if(PREF_KEY_BOOL(XASH_NOWRAP))
+		[oTraceField setWrapsText:NO];
+}
+
+- (void) applicationDidFinishLaunching:(NSNotification * )note {
+	[self startServer:self];
 }
 
 -(IBAction) visitHomePage:(id)sender {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:XTRACE_HOME_PAGE]];
 }
 
--(IBAction) startServer:(id)sender {
-	//[[[oTraceField textStorage] mutableString] setString:@""];
-	
+-(IBAction) startServer:(id)sender {	
 	NSString *serverPath = [[NSBundle mainBundle] pathForResource:@"TraceServer" ofType:@"jar"];
 	
 	NSPipe *outPipe = [NSPipe pipe];
@@ -110,10 +126,6 @@ static AppController *_sharedController = nil;
 	[self createActivityTimer];
 	
 	_lastMessageTime = time(NULL);
-	
-	//change the state of the button
-	[sender setAction:@selector(stopServer:)];
-	[sender setTitle:@"Stop Trace Server"];
 }
 
 -(IBAction) stopServer:(id)sender {
@@ -124,14 +136,10 @@ static AppController *_sharedController = nil;
 	_traceServer = nil;
 	
 	[_currHandle release];
-	
-	//change the state and action of the button
-	[sender setAction:@selector(startServer:)];
-	[sender setTitle:@"Start Trace Server"];
 }
 
 -(IBAction) showLogWindow:(id)sender {
-	[oLogWindow makeKeyAndOrderFront:self];
+	[oLogWindow orderFront:self];
 	[oLogWindow setAlphaValue:[oLogWindow altAlpha]];
 	[self createActivityTimer];
 }
@@ -159,11 +167,7 @@ static AppController *_sharedController = nil;
 #endif
 
 	if(_fadeTimer == nil && [oLogWindow isVisible] && ![oLogWindow isKeyWindow] && time(NULL) - _lastMessageTime > MAX_LAST_MESSAGE_TIME) {
-			_fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL
-														   target:self
-														 selector:@selector(_fadeWindow:)
-														 userInfo:nil
-														  repeats:YES] retain];
+		_fadeTimer = FADE_TIMER;
 	}
 }
 
@@ -203,17 +207,6 @@ static AppController *_sharedController = nil;
 }
 
 //-----------------------
-//	Getter & Setter
-//-----------------------
--(BOOL) isStartingServer {
-	return _isStartingServer;
-}
-
--(void) setIsStartingServer:(BOOL)b {
-	_isStartingServer = b;
-}
-
-//-----------------------
 //	Notification Methods
 //-----------------------
 -(void) serverData:(NSNotification *) note {
@@ -227,7 +220,26 @@ static AppController *_sharedController = nil;
 	NSString *dataString = [[NSString alloc] initWithBytes:[serverData bytes] 
 											 length:[serverData length]
 											encoding:NSASCIIStringEncoding];
-							
+	
+	if([dataString length] == 1) {
+		// Flash returns a LF (hex 0xA) when the connection is closed...
+		if([dataString characterAtIndex:0] == 0xA) {
+			[dataString release];
+			[_currHandle readInBackgroundAndNotify];
+			return;
+		} else {
+			NSLog(@"Seemingly empty string? Length 1, hex: 0x%c",[dataString characterAtIndex:0]);
+		}
+	}
+	
+	// if we are recieving a notification of a closed connection, close the window
+	if([dataString isEqualToString:@"Connection Closed."] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
+		[oLogWindow performClose:self];
+	} else if(![oLogWindow isVisible]) {
+		[self showLogWindow:nil];
+	}
+	
+	// debug formatting
 	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
 	
 	NSString *line;
@@ -235,21 +247,20 @@ static AppController *_sharedController = nil;
 	
 	while ((line = [linesEnum nextObject])) {
 		if ([line length] != 0) {
-			line2 = [line stringByAppendingString:@"\n"]; //slow autorelease loop, I know
+			line2 = [line stringByAppendingString:@"\n"];
 			[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
 		}
 	}
-	
+
 	[dataString release];
 	
+	// log the message time for auto-fade functionality
 	_lastMessageTime = time(NULL);
-	if(![oLogWindow isVisible]) {
-		[self showLogWindow:nil];
-	}
 	
-	//keep the scroller at the bottom
+	// keep the scroller at the bottom
 	[oTraceField scrollRangeToVisible:NSMakeRange([[oTraceField string] length], 0)];
 	
+	// read the next trace output
 	[_currHandle readInBackgroundAndNotify];
 }
 

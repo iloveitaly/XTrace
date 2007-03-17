@@ -2,11 +2,11 @@
  Class: XTraceTest
  
  Description:
- An example of how to use 
+ An example of how to use XTrace
  
  Usage:
  Compile with MTASC using the following command:
- |mtasc -main -header 200:300:30 XTraceTest.as -swf testtrace.swf
+ |mtasc -main -trace com.mab.util.debug.trace -header 200:300:30 XTraceTest.as -swf XTraceTest.swf
  
  Version:
  1.0
@@ -30,7 +30,10 @@ class XTraceTest {
 		debug.trace("[CRITICAL] This is a critical warning");
 		
 		for(var a = 0; a < 10; a++) {//say hi 10 times
-			debug.trace("Hi server! "+a);
+			debug.trace("Hi server! " + a);
 		}
+		
+		var testOb = {question:"Are you cool?", response:"Of course!"};
+		debug.dumpObject(testOb);
 	}
 }

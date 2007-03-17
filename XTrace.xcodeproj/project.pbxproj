@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		270DB94D0B962B6200D9DE04 /* NSTextView+Wrapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */; };
 		27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 27307B720A4DEF5E00450B50 /* MainMenu.nib */; };
+		27B2AB400BA62BE3009B7391 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */; };
+		27B2AB690BA62C2A009B7391 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */; };
 		27B7F52509D6F2140008D41C /* serverConnection.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52309D6F20C0008D41C /* serverConnection.java */; };
 		27B7F52609D6F2160008D41C /* serverStart.java in Sources */ = {isa = PBXBuildFile; fileRef = 27B7F52409D6F20C0008D41C /* serverStart.java */; };
 		27B7F54D09D6F3580008D41C /* TraceServer.jar in Resources */ = {isa = PBXBuildFile; fileRef = 27B7F51109D6F1D70008D41C /* TraceServer.jar */; };
@@ -19,7 +21,6 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		C05114EA0A9E93A700C11F54 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = C05114E90A9E93A600C11F54 /* icon.icns */; };
-		C0D832B90AA6B29600FD8857 /* XTraceIcon.ai in Resources */ = {isa = PBXBuildFile; fileRef = C0D832B80AA6B29600FD8857 /* XTraceIcon.ai */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,10 +28,24 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 27B7F51009D6F1D70008D41C /* TraceServer */;
+			remoteGlobalIDString = 27B7F51009D6F1D70008D41C;
 			remoteInfo = TraceServer;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		27B2AB670BA62C19009B7391 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				27B2AB690BA62C2A009B7391 /* Sparkle.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -39,6 +54,7 @@
 		270DB94B0B962B6200D9DE04 /* NSTextView+Wrapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTextView+Wrapping.h"; path = "Source/Categories/NSTextView+Wrapping.h"; sourceTree = "<group>"; };
 		270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTextView+Wrapping.m"; path = "Source/Categories/NSTextView+Wrapping.m"; sourceTree = "<group>"; };
 		27307B730A4DEF5E00450B50 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = Resources/English.lproj/MainMenu.nib; sourceTree = "<group>"; };
+		27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Source/Frameworks/Sparkle.framework; sourceTree = "<group>"; };
 		27B7F51109D6F1D70008D41C /* TraceServer.jar */ = {isa = PBXFileReference; explicitFileType = archive.jar; includeInIndex = 0; path = TraceServer.jar; sourceTree = BUILT_PRODUCTS_DIR; };
 		27B7F52209D6F20C0008D41C /* MANIFEST.MF */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MANIFEST.MF; sourceTree = "<group>"; };
 		27B7F52309D6F20C0008D41C /* serverConnection.java */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.java; path = serverConnection.java; sourceTree = "<group>"; };
@@ -54,7 +70,7 @@
 		33CA84130A58552700A1513F /* DebugFormatter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DebugFormatter.h; path = Source/Model/DebugFormatter.h; sourceTree = "<group>"; };
 		33CA84140A58552700A1513F /* DebugFormatter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DebugFormatter.m; path = Source/Model/DebugFormatter.m; sourceTree = "<group>"; };
 		33F982460A9A481B006ACA82 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
-		33F9825E0A9A48E6006ACA82 /* English */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		33F9825E0A9A48E6006ACA82 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = Resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* XTrace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XTrace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05114E90A9E93A600C11F54 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = Resources/icon.icns; sourceTree = "<group>"; };
 		C0D832B80AA6B29600FD8857 /* XTraceIcon.ai */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = XTraceIcon.ai; path = Resources/XTraceIcon.ai; sourceTree = "<group>"; };
@@ -73,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				27B2AB400BA62BE3009B7391 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +108,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = "Linked Frameworks";
@@ -127,8 +145,8 @@
 		27307B600A4DEA1000450B50 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				27E406850A4DF6CD001F911E /* AppController.m */,
 				27E406860A4DF6CD001F911E /* AppController.h */,
+				27E406850A4DF6CD001F911E /* AppController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -168,9 +186,9 @@
 		29B97314FDCFA39411CA2CEA /* XTrace */ = {
 			isa = PBXGroup;
 			children = (
+				27055E080985628D005DB08A /* shared.h */,
 				27307B610A4DEA1700450B50 /* Classes */,
 				27B7F52109D6F20C0008D41C /* Server */,
-				27055E080985628D005DB08A /* shared.h */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -228,6 +246,7 @@
 			buildPhases = (
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
+				27B2AB670BA62C19009B7391 /* Copy Frameworks */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
 				270560A40986AC55005DB08A /* Kill Java */,
 			);
@@ -267,7 +286,6 @@
 				27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */,
 				33F9825F0A9A48E6006ACA82 /* InfoPlist.strings in Resources */,
 				C05114EA0A9E93A700C11F54 /* icon.icns in Resources */,
-				C0D832B90AA6B29600FD8857 /* XTraceIcon.ai in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +388,7 @@
 				JAVA_ARCHIVE_CLASSES = YES;
 				JAVA_ARCHIVE_TYPE = JAR;
 				JAVA_COMPILER = /usr/bin/javac;
-				JAVA_MANIFEST_FILE = Source/Server/MANIFEST.MF;
+				JAVA_MANIFEST_FILE = Source/Server/manifest.mf;
 				JAVA_SOURCE_SUBDIR = .;
 				OPTIMIZATION_CFLAGS = "-O0";
 				OTHER_CFLAGS = "";
@@ -422,8 +440,12 @@
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = ppc;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Source/Frameworks\"";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -439,7 +461,11 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = ppc;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/Source/Frameworks\"";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Resources/Info.plist;
@@ -452,6 +478,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_VERSION = 1.1;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -461,6 +488,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_VERSION = 1.1;
 				ARCHS = (
 					ppc,
 					i386,
