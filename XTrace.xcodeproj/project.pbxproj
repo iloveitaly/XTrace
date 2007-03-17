@@ -21,7 +21,6 @@
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		C05114EA0A9E93A700C11F54 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = C05114E90A9E93A600C11F54 /* icon.icns */; };
-		C0D832B90AA6B29600FD8857 /* XTraceIcon.ai in Resources */ = {isa = PBXBuildFile; fileRef = C0D832B80AA6B29600FD8857 /* XTraceIcon.ai */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -287,7 +286,6 @@
 				27307B740A4DEF5E00450B50 /* MainMenu.nib in Resources */,
 				33F9825F0A9A48E6006ACA82 /* InfoPlist.strings in Resources */,
 				C05114EA0A9E93A700C11F54 /* icon.icns in Resources */,
-				C0D832B90AA6B29600FD8857 /* XTraceIcon.ai in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
