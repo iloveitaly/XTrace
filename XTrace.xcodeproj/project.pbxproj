@@ -49,7 +49,6 @@
 
 /* Begin PBXFileReference section */
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		27055E080985628D005DB08A /* shared.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = shared.h; path = Source/shared.h; sourceTree = "<group>"; };
 		270DB94B0B962B6200D9DE04 /* NSTextView+Wrapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSTextView+Wrapping.h"; path = "Source/Categories/NSTextView+Wrapping.h"; sourceTree = "<group>"; };
 		270DB94C0B962B6200D9DE04 /* NSTextView+Wrapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSTextView+Wrapping.m"; path = "Source/Categories/NSTextView+Wrapping.m"; sourceTree = "<group>"; };
@@ -64,8 +63,6 @@
 		27E406890A4DF6D9001F911E /* TraceWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraceWindow.h; sourceTree = "<group>"; };
 		27E4068A0A4DF6D9001F911E /* TraceWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TraceWindow.m; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
-		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
-		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* XTrace_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XTrace_Prefix.pch; path = Source/XTrace_Prefix.pch; sourceTree = "<group>"; };
 		33CA84130A58552700A1513F /* DebugFormatter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = DebugFormatter.h; path = Source/Model/DebugFormatter.h; sourceTree = "<group>"; };
 		33CA84140A58552700A1513F /* DebugFormatter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; name = DebugFormatter.m; path = Source/Model/DebugFormatter.m; sourceTree = "<group>"; };
@@ -103,25 +100,6 @@
 				33CA84140A58552700A1513F /* DebugFormatter.m */,
 			);
 			name = Model;
-			sourceTree = "<group>";
-		};
-		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */,
-				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
-				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
-				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -221,8 +199,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
-				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				27B2AB3F0BA62BE3009B7391 /* Sparkle.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

@@ -27,6 +27,7 @@
 #define FILE_HANDLE_DATA_KEY @"NSFileHandleNotificationDataItem"
 #define XASH_NOWRAP @"noWrap"
 #define XASH_AUTO_CLOSE @"autoClose"
+#define XASH_QUIET @"quiet"
 #define DEBUG 0
 
 //auto window fade constants

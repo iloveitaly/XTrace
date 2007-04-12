@@ -57,7 +57,7 @@ public class serverConnection extends Thread {
 			out.close();
 			connection.close();
 			
-			serverStart.trace("Connection Closed.");
+			serverStart.trace("Connection Closed");
 		}
 		
 		catch (Exception a) {

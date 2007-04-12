@@ -51,7 +51,7 @@ public class serverStart {
 			while(true) {
 				//accept new connections and start a new thread for each connection that is recieved
 				new serverConnection(servSock.accept()).start();
-				trace("Connection Aquired!");
+				trace("Connection Aquired");
 			}
 		}
 		

@@ -44,6 +44,7 @@ static AppController *_sharedController = nil;
 	
 	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_NOWRAP];
 	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_AUTO_CLOSE];
+	[defaults setValue:[NSNumber numberWithBool:NO] forKey:XASH_QUIET];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 		
@@ -210,12 +211,14 @@ static AppController *_sharedController = nil;
 //	Notification Methods
 //-----------------------
 -(void) serverData:(NSNotification *) note {
-	NSData *serverData;
-	if(![serverData = [[note userInfo] valueForKey:FILE_HANDLE_DATA_KEY] length]) return; //check to make sure we dont have EOF
+	NSData *serverData = [[note userInfo] valueForKey:FILE_HANDLE_DATA_KEY];
+	BOOL dontOutput = NO;
 	
-#if DEBUG >= 1
-	NSLog(@"Got Data: %s", [serverData bytes]);
-#endif
+	//check to make sure we dont have EOF
+	if(![serverData length])
+		return; 
+	
+	//NSLog(@"Got Data: %s", [serverData bytes]);
 	
 	NSString *dataString = [[NSString alloc] initWithBytes:[serverData bytes] 
 											 length:[serverData length]
@@ -224,41 +227,47 @@ static AppController *_sharedController = nil;
 	if([dataString length] == 1) {
 		// Flash returns a LF (hex 0xA) when the connection is closed...
 		if([dataString characterAtIndex:0] == 0xA) {
-			[dataString release];
-			[_currHandle readInBackgroundAndNotify];
-			return;
+			// dont write this string into the window... it will cause it to popup again
+			dontOutput = YES;
 		} else {
 			NSLog(@"Seemingly empty string? Length 1, hex: 0x%c",[dataString characterAtIndex:0]);
 		}
 	}
 	
 	// if we are recieving a notification of a closed connection, close the window
-	if([dataString isEqualToString:@"Connection Closed."] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
+	if([dataString isEqualToString:@"Connection Closed"] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
 		[oLogWindow performClose:self];
-	} else if(![oLogWindow isVisible]) {
+		
+		if(PREF_KEY_BOOL(XASH_QUIET))
+			dontOutput = YES;
+	} else if(([dataString isEqualToString:@"Connection Closed"] || [dataString isEqualToString:@"Connection Aquired"]) && PREF_KEY_BOOL(XASH_QUIET)) {
+		dontOutput = YES;
+	} else if(![oLogWindow isVisible] && !dontOutput) {
 		[self showLogWindow:nil];
 	}
 	
 	// debug formatting
-	NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
-	
-	NSString *line;
-	NSString *line2;
-	
-	while ((line = [linesEnum nextObject])) {
-		if ([line length] != 0) {
-			line2 = [line stringByAppendingString:@"\n"];
-			[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
+	if(!dontOutput) {
+		NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
+		
+		NSString *line;
+		NSString *line2;
+		
+		while ((line = [linesEnum nextObject])) {
+			if ([line length] != 0) {
+				line2 = [line stringByAppendingString:@"\n"];
+				[[oTraceField textStorage] appendAttributedString:[formatter formatString:line2]];
+			}
 		}
-	}
 
+		// log the message time for auto-fade functionality
+		_lastMessageTime = time(NULL);
+		
+		// keep the scroller at the bottom
+		[oTraceField scrollRangeToVisible:NSMakeRange([[oTraceField string] length], 0)];
+	}
+	
 	[dataString release];
-	
-	// log the message time for auto-fade functionality
-	_lastMessageTime = time(NULL);
-	
-	// keep the scroller at the bottom
-	[oTraceField scrollRangeToVisible:NSMakeRange([[oTraceField string] length], 0)];
 	
 	// read the next trace output
 	[_currHandle readInBackgroundAndNotify];
