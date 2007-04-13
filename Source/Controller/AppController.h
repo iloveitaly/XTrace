@@ -28,6 +28,7 @@
 #define XASH_NOWRAP @"noWrap"
 #define XASH_AUTO_CLOSE @"autoClose"
 #define XASH_QUIET @"quiet"
+#define XASH_AUTO_CLEAR @"autoClear"
 #define DEBUG 0
 
 //auto window fade constants

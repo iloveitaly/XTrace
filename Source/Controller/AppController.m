@@ -45,6 +45,7 @@ static AppController *_sharedController = nil;
 	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_NOWRAP];
 	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_AUTO_CLOSE];
 	[defaults setValue:[NSNumber numberWithBool:NO] forKey:XASH_QUIET];
+	[defaults setValue:[NSNumber numberWithBool:NO] forKey:XASH_AUTO_CLEAR];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 		
@@ -244,6 +245,10 @@ static AppController *_sharedController = nil;
 		dontOutput = YES;
 	} else if(![oLogWindow isVisible] && !dontOutput) {
 		[self showLogWindow:nil];
+	}
+	
+	if([dataString isEqualToString:@"Connection Closed"] && PREF_KEY_BOOL(XASH_AUTO_CLEAR)) {
+		[self clearLog:self];
 	}
 	
 	// debug formatting
