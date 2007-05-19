@@ -29,6 +29,7 @@
 #define XASH_AUTO_CLOSE @"autoClose"
 #define XASH_QUIET @"quiet"
 #define XASH_AUTO_CLEAR @"autoClear"
+#define XASH_AUTO_FADE @"autoFade"
 #define DEBUG 0
 
 //auto window fade constants
@@ -50,22 +51,21 @@
 	//auto window fade stuff
 	NSTimer *_activityTimer, *_fadeTimer;
 	time_t _lastMessageTime;
-	BOOL autoHideActive;
 }
 
-+(AppController *) sharedController;
++ (AppController *) sharedController;
 
--(IBAction) visitHomePage:(id)sender;
--(IBAction) startServer:(id)sender;
--(IBAction) stopServer:(id)sender;
--(IBAction) clearLog:(id)sender;
--(IBAction) showLogWindow:(id)sender;
--(IBAction) toggleAutoHide:(id)sender;
-
--(void) checkForRecentActivity:(NSTimer *)timer;
--(void) _fadeWindow:(NSTimer *)theTimer;
--(void) createActivityTimer;
--(void) releaseActivityTimer;
+- (IBAction) visitHomePage:(id)sender;
+- (IBAction) startServer:(id)sender;
+- (IBAction) stopServer:(id)sender;
+- (IBAction) clearLog:(id)sender;
+- (IBAction) showLogWindow:(id)sender;
+- (IBAction) toggleAutoHide:(id)sender;
+  
+- (void) checkForRecentActivity:(NSTimer *)timer;
+- (void) _fadeWindow:(NSTimer *)theTimer;
+- (void) createActivityTimer;
+- (void) releaseActivityTimer;
 
 //-----------------------
 //	Notification Methods

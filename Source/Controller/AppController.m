@@ -20,13 +20,6 @@
 #import "AppController.h"
 #import "NSTextView+Wrapping.h"
 #import "shared.h"
-
-#define FADE_TIMER [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL \
-													 target:self \
-												   selector:@selector(_fadeWindow:) \
-												   userInfo:nil \
-													repeats:YES] retain];
-
 #import <time.h>
 
 static AppController *_sharedController = nil;
@@ -46,6 +39,7 @@ static AppController *_sharedController = nil;
 	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_AUTO_CLOSE];
 	[defaults setValue:[NSNumber numberWithBool:NO] forKey:XASH_QUIET];
 	[defaults setValue:[NSNumber numberWithBool:NO] forKey:XASH_AUTO_CLEAR];
+	[defaults setValue:[NSNumber numberWithBool:YES] forKey:XASH_AUTO_FADE];
 	
 	[[NSUserDefaults standardUserDefaults] registerDefaults:defaults];
 		
@@ -83,9 +77,7 @@ static AppController *_sharedController = nil;
 		//either app defaults or user set, we create the formatter object
 		formatter = [[DebugFormatter alloc] initWithUserDefaults:[NSUserDefaults standardUserDefaults]];
 	}
-	
-	autoHideActive = YES;
-	
+		
 	return self;
 }
 
@@ -101,15 +93,14 @@ static AppController *_sharedController = nil;
 		[oTraceField setWrapsText:NO];
 }
 
-- (void) applicationDidFinishLaunching:(NSNotification * )note {
-	[self startServer:self];
-}
+#pragma mark -
+#pragma mark Actions
 
 -(IBAction) visitHomePage:(id)sender {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:XTRACE_HOME_PAGE]];
 }
 
--(IBAction) startServer:(id)sender {	
+- (IBAction) startServer:(id)sender {	
 	NSString *serverPath = [[NSBundle mainBundle] pathForResource:@"TraceServer" ofType:@"jar"];
 	
 	NSPipe *outPipe = [NSPipe pipe];
@@ -130,7 +121,7 @@ static AppController *_sharedController = nil;
 	_lastMessageTime = time(NULL);
 }
 
--(IBAction) stopServer:(id)sender {
+- (IBAction) stopServer:(id)sender {
 	[self releaseActivityTimer];
 	
 	[_traceServer terminate];
@@ -140,24 +131,21 @@ static AppController *_sharedController = nil;
 	[_currHandle release];
 }
 
--(IBAction) showLogWindow:(id)sender {
+- (IBAction) showLogWindow:(id)sender {
 	[oLogWindow orderFront:self];
 	[oLogWindow setAlphaValue:[oLogWindow altAlpha]];
 	[self createActivityTimer];
 }
 
 
--(IBAction) clearLog:(id)sender {
+- (IBAction) clearLog:(id)sender {
 	[oTraceField setString:@""];
 }
 
--(IBAction) toggleAutoHide:(id)sender {
+- (IBAction) toggleAutoHide:(id)sender {
 	if([sender state] == NSOnState) {
-		autoHideActive = YES;
-		[self createActivityTimer];
-		
+		[self createActivityTimer];		
 	} else {
-		autoHideActive = NO;
 		[self releaseActivityTimer];
 	}
 	
@@ -169,11 +157,15 @@ static AppController *_sharedController = nil;
 #endif
 
 	if(_fadeTimer == nil && [oLogWindow isVisible] && ![oLogWindow isKeyWindow] && time(NULL) - _lastMessageTime > MAX_LAST_MESSAGE_TIME) {
-		_fadeTimer = FADE_TIMER;
+		_fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL
+															 target:self
+														   selector:@selector(_fadeWindow:)
+														   userInfo:nil
+															repeats:YES] retain];
 	}
 }
 
--(void) _fadeWindow:(NSTimer *)theTimer {	
+- (void) _fadeWindow:(NSTimer *)theTimer {	
     if ([oLogWindow alphaValue] > FADE_INCR) {
         // If oLogWindow is still partially opaque, reduce its opacity.
         [oLogWindow setAlphaValue:[oLogWindow alphaValue] - FADE_INCR];
@@ -192,8 +184,8 @@ static AppController *_sharedController = nil;
 //-----------------------
 //  Activity Timer Methods
 //-----------------------
--(void) createActivityTimer {
-	if(autoHideActive) {
+- (void) createActivityTimer {
+	if(PREF_KEY_BOOL(XASH_AUTO_FADE)) {
 		_activityTimer = [[NSTimer scheduledTimerWithTimeInterval:ACTIVITY_CHECK_INTERVAL //check every half a minute
 														   target:self
 														 selector:@selector(checkForRecentActivity:)
@@ -208,10 +200,10 @@ static AppController *_sharedController = nil;
 	_activityTimer = nil;
 }
 
-//-----------------------
-//	Notification Methods
-//-----------------------
--(void) serverData:(NSNotification *) note {
+#pragma mark -
+#pragma mark Notifications
+
+- (void) serverData:(NSNotification *) note {
 	NSData *serverData = [[note userInfo] valueForKey:FILE_HANDLE_DATA_KEY];
 	BOOL dontOutput = NO;
 	
@@ -291,4 +283,9 @@ static AppController *_sharedController = nil;
 	
 	[_traceServer terminate]; //kill off the child process before we die
 }
+
+- (void) applicationDidFinishLaunching:(NSNotification * )note {
+	[self startServer:self];
+}
+
 @end
