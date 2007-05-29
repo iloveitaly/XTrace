@@ -61,16 +61,17 @@
 - (IBAction) clearLog:(id)sender;
 - (IBAction) showLogWindow:(id)sender;
 - (IBAction) toggleAutoHide:(id)sender;
-  
+
+- (void) updateLastMessageTime;
 - (void) checkForRecentActivity:(NSTimer *)timer;
-- (void) _fadeWindow:(NSTimer *)theTimer;
+- (void) fadeWindow:(NSTimer *)theTimer;
 - (void) createActivityTimer;
 - (void) releaseActivityTimer;
 
 //-----------------------
 //	Notification Methods
 //-----------------------
--(void) serverData:(NSNotification *) note;
--(void) serverClosed:(NSNotification *) note;
--(void) appWillTerminate:(NSNotification *) note;
+- (void) serverData:(NSNotification *)note;
+- (void) serverClosed:(NSNotification *)note;
+- (void) applicationWillTerminate:(NSNotification *)note;
 @end

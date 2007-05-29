@@ -55,7 +55,7 @@ static AppController *_sharedController = nil;
 													 name:@"NSTaskDidTerminateNotification"
 												   object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self
-												 selector:@selector(appWillTerminate:)
+												 selector:@selector(applicationWillTerminate:)
 													 name:@"NSApplicationWillTerminateNotification"
 												   object:NSApp];
 		[[NSNotificationCenter defaultCenter] addObserver:self
@@ -81,14 +81,16 @@ static AppController *_sharedController = nil;
 	return self;
 }
 
--(void) awakeFromNib {	
-	//make the shell script editor fixed at monaco pt 10 font
+- (void) awakeFromNib {	
+	// make the log window fixed at 10pt monaco
+	// looks good for logging
 	NSMutableDictionary *editorAttributes = [NSMutableDictionary dictionary];
 	NSFont *codeFont = [NSFont userFixedPitchFontOfSize:10];
 	[editorAttributes setObject:codeFont forKey:NSFontAttributeName];
 	[oTraceField setFont:codeFont];
 	[oTraceField setTypingAttributes:editorAttributes];
 	
+	// disable wrapping if requested
 	if(PREF_KEY_BOOL(XASH_NOWRAP))
 		[oTraceField setWrapsText:NO];
 }
@@ -96,7 +98,7 @@ static AppController *_sharedController = nil;
 #pragma mark -
 #pragma mark Actions
 
--(IBAction) visitHomePage:(id)sender {
+- (IBAction) visitHomePage:(id)sender {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:XTRACE_HOME_PAGE]];
 }
 
@@ -118,7 +120,7 @@ static AppController *_sharedController = nil;
 	//create the activity timer
 	[self createActivityTimer];
 	
-	_lastMessageTime = time(NULL);
+	[self updateLastMessageTime];
 }
 
 - (IBAction) stopServer:(id)sender {
@@ -134,6 +136,7 @@ static AppController *_sharedController = nil;
 - (IBAction) showLogWindow:(id)sender {
 	[oLogWindow orderFront:self];
 	[oLogWindow setAlphaValue:[oLogWindow altAlpha]];
+	[self updateLastMessageTime];
 	[self createActivityTimer];
 }
 
@@ -151,6 +154,13 @@ static AppController *_sharedController = nil;
 	
 }
 
+#pragma mark -
+#pragma mark Activity Check Methods
+
+- (void) updateLastMessageTime {
+	_lastMessageTime = time(NULL);
+}
+
 -(void) checkForRecentActivity:(NSTimer *)timer {
 #if DEBUG >= 1
 	NSLog(@"Checking for recent activity...");
@@ -159,13 +169,13 @@ static AppController *_sharedController = nil;
 	if(_fadeTimer == nil && [oLogWindow isVisible] && ![oLogWindow isKeyWindow] && time(NULL) - _lastMessageTime > MAX_LAST_MESSAGE_TIME) {
 		_fadeTimer = [[NSTimer scheduledTimerWithTimeInterval:FADE_INTERVAL
 															 target:self
-														   selector:@selector(_fadeWindow:)
+														   selector:@selector(fadeWindow:)
 														   userInfo:nil
 															repeats:YES] retain];
 	}
 }
 
-- (void) _fadeWindow:(NSTimer *)theTimer {	
+- (void) fadeWindow:(NSTimer *)theTimer {	
     if ([oLogWindow alphaValue] > FADE_INCR) {
         // If oLogWindow is still partially opaque, reduce its opacity.
         [oLogWindow setAlphaValue:[oLogWindow alphaValue] - FADE_INCR];
@@ -181,9 +191,6 @@ static AppController *_sharedController = nil;
     }
 }
 
-//-----------------------
-//  Activity Timer Methods
-//-----------------------
 - (void) createActivityTimer {
 	if(PREF_KEY_BOOL(XASH_AUTO_FADE)) {
 		_activityTimer = [[NSTimer scheduledTimerWithTimeInterval:ACTIVITY_CHECK_INTERVAL //check every half a minute
@@ -194,7 +201,7 @@ static AppController *_sharedController = nil;
 	}
 }
 
--(void) releaseActivityTimer {	
+- (void) releaseActivityTimer {	
 	[_activityTimer invalidate];
 	[_activityTimer release];
 	_activityTimer = nil;
@@ -228,22 +235,23 @@ static AppController *_sharedController = nil;
 	}
 	
 	// if we are recieving a notification of a closed connection, close the window
-	if([dataString isEqualToString:@"Connection Closed"] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
+	if([dataString hasPrefix:@"Connection Closed"] && PREF_KEY_BOOL(XASH_AUTO_CLOSE)) {
 		[oLogWindow performClose:self];
 		
 		if(PREF_KEY_BOOL(XASH_QUIET))
 			dontOutput = YES;
-	} else if(([dataString isEqualToString:@"Connection Closed"] || [dataString isEqualToString:@"Connection Aquired"]) && PREF_KEY_BOOL(XASH_QUIET)) {
+	} else if(([dataString hasPrefix:@"Connection Closed"] || [dataString hasPrefix:@"Connection Aquired"]) && PREF_KEY_BOOL(XASH_QUIET)) {
+		// use prefix because extra data (line ending) might be at the end
 		dontOutput = YES;
 	} else if(![oLogWindow isVisible] && !dontOutput) {
 		[self showLogWindow:nil];
 	}
 	
-	if([dataString isEqualToString:@"Connection Closed"] && PREF_KEY_BOOL(XASH_AUTO_CLEAR)) {
+	if([dataString hasPrefix:@"Connection Closed"] && PREF_KEY_BOOL(XASH_AUTO_CLEAR)) {
 		[self clearLog:self];
 	}
 	
-	// debug formatting
+	// only process the output if we need to
 	if(!dontOutput) {
 		NSEnumerator *linesEnum = [[dataString componentsSeparatedByString:@"\n"] objectEnumerator];
 		
@@ -258,7 +266,7 @@ static AppController *_sharedController = nil;
 		}
 
 		// log the message time for auto-fade functionality
-		_lastMessageTime = time(NULL);
+		[self updateLastMessageTime];
 		
 		// keep the scroller at the bottom
 		[oTraceField scrollRangeToVisible:NSMakeRange([[oTraceField string] length], 0)];
@@ -276,7 +284,7 @@ static AppController *_sharedController = nil;
 #endif
 }
 
-- (void) appWillTerminate:(NSNotification *) note {
+- (void) applicationWillTerminate:(NSNotification *) note {
 #if DEBUG
 	NSLog(@"App will terminate");
 #endif
